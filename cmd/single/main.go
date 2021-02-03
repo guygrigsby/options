@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/guygrigsby/options"
+)
 
 func main() {
-	u := options.NewUserContext( // HLcter
+	u := options.NewContext( // HLcter
 		options.WithUsername("guy"), // HLcter
 	) // HLcter
 

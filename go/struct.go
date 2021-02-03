@@ -1,4 +1,4 @@
-package main
+package instance
 
 // START OMIT
 type Struct struct {

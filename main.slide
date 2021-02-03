@@ -28,10 +28,10 @@ Programming languages Need a way to create configurable constructors.
 
 **Java**
 
-.code Overload.java /^class/,/{/
-.code Overload.java /^\s+Overload\(String str, int i\)/,/^\s+}/
-.code Overload.java /^\s+Overload\(\)/,/^\s+}/
-.code Overload.java /^\s+Overload\(String str\)/,/^\s+}/
+.code java/Overload.java /^class/,/{/
+.code java/Overload.java /^\s+Overload\(String str, int i\)/,/^\s+}/
+.code java/Overload.java /^\s+Overload\(\)/,/^\s+}/
+.code java/Overload.java /^\s+Overload\(String str\)/,/^\s+}/
 
 
 ## Config object {#config}
@@ -42,9 +42,9 @@ Programming languages Need a way to create configurable constructors.
 
 **Javascript**
 
-.code config.js /^class/,/{/
-.code config.js /^\s+constructor/,/\s+}/
-.code config.js /START OMIT/,/END OMIT/
+.code js/config.js /^class/,/{/
+.code js/config.js /^\s+constructor/,/\s+}/
+.code js/config.js /START OMIT/,/END OMIT/
 
 ## Naked Instantiation {#instantiation}
 
@@ -54,17 +54,37 @@ Programming languages Need a way to create configurable constructors.
 
 **Rust**
 
-.code struct.rs /START OMIT/,/END OMIT/
+.code rust/struct.rs /START OMIT/,/END OMIT/
 
 ##
 **Go**
 
-.code struct.go /START OMIT/,/END OMIT/
+.code go/struct.go /START OMIT/,/END OMIT/
 
 ## Enter Options
 
-.play options.go /^func single/,/^}/ HLcter
+Options provide a way in go to create flexible constructors that allow for initialization. It also allows access to unexported variables at time of creation only.
+
+Simple Example:
+
+.play cmd/single/main.go /^func main/,/^}/ HLcter
 
 ## Details
 
-.code options.go /^type UserContext/,/^}/
+.code options.go /^type Context/,/^}/
+
+.caption This is a contrived example. _Please_ don't override [[https://golang.org/pkg/context/][`Context`]].
+
+## The Constructor
+
+.code options.go /^func NewContext/,/^}/
+
+## The Options 
+
+.code options.go /^\/\/ WithUsername/,/^}/
+
+.code options.go /^\/\/ WithTimeout/,/^}/
+
+## More Complex Example
+
+.play cmd/multi/main.go /^func main/,/^}/ HLcter

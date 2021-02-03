@@ -18,7 +18,7 @@ func multi() {
 		DisableCompression: true,
 	}
 	client := &http.Client{Transport: tr}
-	u := NewUserContext( // HLcter
+	u := NewContext( // HLcter
 		WithUsername("guy"),         // HLcter
 		WithPassword("secret"),      // HLcter
 		WithClient(client),          // HLcter
@@ -29,9 +29,9 @@ func multi() {
 
 }
 
-type ContextOption func(*UserContext)
+type ContextOption func(*Context)
 
-type UserContext struct {
+type Context struct {
 	ctx      context.Context
 	client   *http.Client
 	username string
@@ -39,18 +39,18 @@ type UserContext struct {
 	timeout  time.Duration
 }
 
-// NewUserContext creates a new UserContext with the provided options
-func NewUserContext(opts ...ContextOption) *UserContext {
-	uCtx := UserContext{}
+// NewContext creates a new Context with the provided options
+func NewContext(opts ...ContextOption) *Context {
+	uCtx := Context{}
 	for _, o := range opts {
 		o(&uCtx)
 	}
 	return &uCtx
 }
 
-// WithDefaultTimeout sets the default timeout of 1 second
-func WithTimeout(ttl time.Duration) ContextOption {
-	return func(c *UserContext) {
+// WithTimeout sets the context timeout
+func WithTimeout(ttl time.Duration) ContextOption { // HL
+	return func(c *Context) {
 		c.timeout = ttl
 		var cancel func()
 		c.ctx, cancel = context.WithTimeout(context.Background(), ttl)
@@ -67,29 +67,29 @@ func WithTimeout(ttl time.Duration) ContextOption {
 }
 
 // WithClient set an *http.Client to be used by the context
-func WithClient(client *http.Client) ContextOption {
-	return func(c *UserContext) {
+func WithClient(client *http.Client) ContextOption { // HL
+	return func(c *Context) {
 		c.client = client
 	}
 }
 
 // WithUsername is an option that sets the username for remote server collector connections
-func WithUsername(username string) ContextOption {
-	return func(c *UserContext) {
+func WithUsername(username string) ContextOption { // HL
+	return func(c *Context) {
 		c.username = username
 	}
 }
 
 // WithPassword is an option that sets the password for remote server collector connections
 func WithPassword(password string) ContextOption {
-	return func(c *UserContext) {
+	return func(c *Context) {
 		c.password = password
 	}
 }
 
 // FromContext sets a derived context
 func FromContext(ctx context.Context) ContextOption {
-	return func(c *UserContext) {
+	return func(c *Context) {
 		c.ctx = context.WithValue(c.ctx, "context", ctx)
 	}
 }
