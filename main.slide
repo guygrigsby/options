@@ -1,0 +1,70 @@
+# Go Options Pattern
+Go Options Pattern
+15:04 2 Jan 2006
+Tags: Go, otel, opentelemetry, trickster, grafana, prometheus, influx, time-series
+Summary: Describing the options pattern in Go by way of adding Open Telemetry to the open source project Trickster
+
+Guy J Grigsby
+Engineer, The New York Times
+guy@grigsby.dev
+https://grigsby.dev
+@usernamevalid
+
+## Background
+
+Programming languages Need a way to create configurable constructors.
+
+## How do other languages do it?
+
+- Overloading
+- Config Object
+- Naked Instantiation
+
+## Overloading {#overloading}
+
+- Same function
+- Different parameters
+- Can get out of control stringing cters
+
+**Java**
+
+.code Overload.java /^class/,/{/
+.code Overload.java /^\s+Overload\(String str, int i\)/,/^\s+}/
+.code Overload.java /^\s+Overload\(\)/,/^\s+}/
+.code Overload.java /^\s+Overload\(String str\)/,/^\s+}/
+
+
+## Config object {#config}
+
+- Terse
+- Unclear
+- No compile time checks
+
+**Javascript**
+
+.code config.js /^class/,/{/
+.code config.js /^\s+constructor/,/\s+}/
+.code config.js /START OMIT/,/END OMIT/
+
+## Naked Instantiation {#instantiation}
+
+- Clear
+- Simple
+- No initialization (including defaults)
+
+**Rust**
+
+.code struct.rs /START OMIT/,/END OMIT/
+
+##
+**Go**
+
+.code struct.go /START OMIT/,/END OMIT/
+
+## Enter Options
+
+.play options.go /^func single/,/^}/ HLcter
+
+## Details
+
+.code options.go /^type UserContext/,/^}/
