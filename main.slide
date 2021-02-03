@@ -61,13 +61,20 @@ Programming languages Need a way to create configurable constructors.
 
 .code go/struct.go /START OMIT/,/END OMIT/
 
-## Enter Options
+## Enter Go Options
+
+.image images/gopher-options.jpg _ 1000
+
+.caption _Gopher_ by [[https://instagram.com/reneefrench][Renee French]]. Used and modified with permission under Creative Commons 2.0.
+
+## What are My Options?
 
 Options provide a way in go to create flexible constructors that allow for initialization. It also allows access to unexported variables at time of creation only.
 
 Simple Example:
 
 .play cmd/single/main.go /^func main/,/^}/ HLcter
+
 
 ## Details
 
@@ -79,11 +86,13 @@ Simple Example:
 
 .code options.go /^func NewContext/,/^}/
 
-## The Options 
+## The Options
 
 .code options.go /^\/\/ WithUsername/,/^}/
 
 .code options.go /^\/\/ WithTimeout/,/^}/
+
+
 
 ## More Complex Example
 
