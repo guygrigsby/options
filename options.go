@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"reflect"
+	"runtime"
 	"time"
 )
 
@@ -18,14 +20,12 @@ func multi() {
 		DisableCompression: true,
 	}
 	client := &http.Client{Transport: tr}
-	u := NewContext( // HLcter
+	_ = NewContext( // HLcter
 		WithUsername("guy"),         // HLcter
 		WithPassword("secret"),      // HLcter
 		WithClient(client),          // HLcter
 		WithTimeout(defaultTimeout), // HLcter
 	) // HLcter
-
-	fmt.Printf("%#v", u)
 
 }
 
@@ -43,6 +43,7 @@ type Context struct {
 func NewContext(opts ...ContextOption) *Context {
 	uCtx := Context{}
 	for _, o := range opts {
+		fmt.Printf("Exec %v\n", runtime.FuncForPC(reflect.ValueOf(o).Pointer()).Name())
 		o(&uCtx)
 	}
 	return &uCtx
@@ -50,6 +51,7 @@ func NewContext(opts ...ContextOption) *Context {
 
 // WithTimeout sets the context timeout
 func WithTimeout(ttl time.Duration) ContextOption { // HL
+	println("WithContext called by user")
 	return func(c *Context) {
 		c.timeout = ttl
 		var cancel func()
@@ -68,6 +70,7 @@ func WithTimeout(ttl time.Duration) ContextOption { // HL
 
 // WithClient set an *http.Client to be used by the context
 func WithClient(client *http.Client) ContextOption { // HL
+	println("WithClient called by user")
 	return func(c *Context) {
 		c.client = client
 	}
@@ -75,6 +78,7 @@ func WithClient(client *http.Client) ContextOption { // HL
 
 // WithUsername is an option that sets the username for remote server collector connections
 func WithUsername(username string) ContextOption { // HL
+	println("WithUsername called by user")
 	return func(c *Context) {
 		c.username = username
 	}
@@ -82,6 +86,7 @@ func WithUsername(username string) ContextOption { // HL
 
 // WithPassword is an option that sets the password for remote server collector connections
 func WithPassword(password string) ContextOption {
+	println("WithPassword called by user")
 	return func(c *Context) {
 		c.password = password
 	}
@@ -89,6 +94,7 @@ func WithPassword(password string) ContextOption {
 
 // FromContext sets a derived context
 func FromContext(ctx context.Context) ContextOption {
+	println("FromContext called by user")
 	return func(c *Context) {
 		c.ctx = context.WithValue(c.ctx, "context", ctx)
 	}
