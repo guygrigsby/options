@@ -12,7 +12,13 @@ https://grigsby.dev
 
 ## Background
 
-Programming languages Need a way to create configurable constructors.
+- Programming languages need a way to create flexible constructors.
+- Sometimes structs/objects need to be created using different parameters
+- Stucts/objects may need initialization that is invisible to the caller.
+
+.image images/constuct-gopher.png _ 550
+
+.caption _Gopher_ by [[https://instagram.com/reneefrench][Renee French]]. Used and modified with permission.
 
 ## How do other languages do it?
 
@@ -65,7 +71,7 @@ Programming languages Need a way to create configurable constructors.
 
 .image images/gopher-options.jpg _ 1000
 
-.caption _Gopher_ by [[https://instagram.com/reneefrench][Renee French]]. Used and modified with permission under Creative Commons 2.0.
+.caption _Gopher_ by [[https://instagram.com/reneefrench][Renee French]]. Used and modified with permission.
 
 ## What are My Options?
 
