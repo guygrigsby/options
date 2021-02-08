@@ -46,7 +46,7 @@ Programming languages Need a way to create configurable constructors.
 .code js/config.js /^\s+constructor/,/\s+}/
 .code js/config.js /START OMIT/,/END OMIT/
 
-## Naked Instantiation {#instantiation}
+## Naked Initialization {#initialization}
 
 - Clear
 - Simple
